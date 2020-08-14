@@ -1,18 +1,14 @@
-const apiKey = '8c00744737828145f3aa9a756bb85f06';
 
-async function getTemp() {
+
+async function apiRequest(place, tempType) {
+  const apiKey = '8c00744737828145f3aa9a756bb85f06';
   try {
-    const tempFjson = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${apiKey}&units=imperial`,
+    const temperature = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${apiKey}&units=${tempType}`,
       { mode: 'cors' },
     );
-    const tempCjson = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${apiKey}&units=metric`,
-      { mode: 'cors' },
-    );
-    const tempF = await tempFjson.json();
-    const tempC = await tempCjson.json();
-    return Promise.resolve([tempF, tempC]);
+    const temp = await temperature.json();
+    return Promise.resolve(temp);
   } catch (error) {
     return Promise.reject(error);
   }
@@ -20,12 +16,12 @@ async function getTemp() {
 
 function component() {
   const element = document.createElement('div');
-  getTemp().then((response, reject) => {
+  apiRequest('London,uk', 'metric').then((response, reject) => {
     const returners = response;
     console.log(returners);
-    element.innerHTML = returners[1].main.temp;
-    if (!returners[1].main.temp) {
-      reject()
+    element.innerHTML = returners.main.temp;
+    if (!returners.main.temp) {
+      element.innerHTML = reject;
     }
   });
 
