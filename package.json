@@ -24,6 +24,9 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "lodash": "^4.17.20"
+    "algoliasearch": "^4.4.0",
+    "autocomplete.js": "^0.37.1",
+    "lodash": "^4.17.20",
+    "places.js": "^1.19.0"
   }
 }

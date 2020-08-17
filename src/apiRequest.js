@@ -5,6 +5,7 @@ async function apiRequest(place, tempType) {
       `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${apiKey}&units=${tempType}`,
       { mode: 'cors' },
     );
+    console.log(temperature);
     const temp = temperature.json();
     return Promise.resolve(temp);
   } catch (error) {

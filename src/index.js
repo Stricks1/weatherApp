@@ -1,17 +1,10 @@
-import apiRequest from './apiRequest';
+import domManipulation from './render/domManipulation';
 
-function component() {
-  const element = document.createElement('div');
-  apiRequest('London,uk', 'metric').then((response) => {
-    const returners = response;
-    console.log(returners);
-    element.innerHTML = returners.main.temp;
-  }).catch(e => {
-    console.log('here')
-    e('a3');
-    console.log('here2')
-  });
-  return element;
-}
+// eslint-disable-next-line no-undef
+places({
+  appId: 'pl329QO9HIMJ',
+  apiKey: 'a4154f5237168e76dfca7f1c06afa53f',
+  container: document.getElementById('address-input'),
+}).configure({ type: 'city' });
 
-document.body.appendChild(component());
+domManipulation.setListeners();
