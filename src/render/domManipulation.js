@@ -8,7 +8,7 @@ const domManipulation = (() => {
       const returners = response;
       element.innerHTML = returners.main.temp;
       document.body.appendChild(element);
-    }).catch(e => {
+    }).catch(() => {
       element.innerHTML = 'City not found';
       document.body.appendChild(element);
     });
