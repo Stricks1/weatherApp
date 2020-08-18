@@ -8,7 +8,26 @@
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
   </head>
   <body>
-    <input type='search' id='address-input' placeholder="Enter city here...">
+    <div class='container' id='bg-load'>
+      <div class='d-flex flex-column' id='search-bar'>
+        <div class='align-self-center w-75 d-flex flex-column'>
+          <input type='search' id='address-input' placeholder="Enter city here...">
+          <button id='search-city' class='align-self-center w-25'>Search</button>
+        </div>
+      </div>
+        <div class='d-none align-self-center' id='loading'>
+          <img src='https://thumbs.gfycat.com/OrderlyHeartyAsiaticlesserfreshwaterclam-small.gif'>
+        </div>
+      <div class='d-flex flex-column'>
+        <span id='city-name'></span>
+        <span id='country-name'></span>
+        <span id='temp-c'></span>
+        <span id='temp-f'></span>
+        <span id='main-info'></span>
+        <span id='description-info'></span>
+        <img id='icon-img' class='logo-sqre'>
+      </div>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>

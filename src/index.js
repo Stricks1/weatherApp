@@ -1,3 +1,5 @@
+import './style.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import domManipulation from './render/domManipulation';
 
 // eslint-disable-next-line no-undef
