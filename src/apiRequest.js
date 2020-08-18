@@ -15,21 +15,26 @@ async function apiRequest(place) {
     const tempC = await temperatureC.json();
     const cityInfo = new CityWeather(tempR.name, tempR.sys.country,
       tempC.main.temp, tempR.main.temp, tempR.weather[0].main,
-      tempR.weather[0].description, tempR.weather[0].icon);
+      tempR.weather[0].description, tempR.weather[0].icon, tempR.coord.lat, tempR.coord.lon);
     return Promise.resolve(cityInfo);
   } catch (error) {
     return Promise.reject(alert);
   }
 }
 
-async function apiFlickr(weatherInfo) {
+async function apiFlickr(weatherInfo, lat, long) {
   const apiKey = '2553c72554412ae1dcc486fb52503f43';
-  const tag = 'sky,weather';
+  const tag = 'outside';
+  console.log(lat)
+  console.log(long)
   try {
+    console.log('try?')
     const imagesRet = await fetch(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tag}&text=${weatherInfo}&media=photos&geo_context=2&format=json&nojsoncallback=1`,
+   //   `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tag}&text=${weatherInfo}&media=photos&geo_context=2&lat=${lat}&lon=${long}&radius=31&format=json&nojsoncallback=1`,
+      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&media=photos&geo_context=2&lat=${lat}&lon=${long}&radius=31&format=json&nojsoncallback=1`,
       { mode: 'cors' },
     );
+    console.log(imagesRet)
     const imges = await imagesRet.json();
     const random = Math.floor(Math.random() * (imges.photos.photo.length - 1) + 1);
     console.log(weatherInfo);

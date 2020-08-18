@@ -1,5 +1,5 @@
 class CityWeather {
-  constructor(city, country, temperatureC, temperatureF, main, description, icon) {
+  constructor(city, country, temperatureC, temperatureF, main, description, icon, lat, long) {
     this.city = city;
     this.country = country;
     this.temperatureC = temperatureC;
@@ -7,6 +7,8 @@ class CityWeather {
     this.main = main;
     this.description = description;
     this.icon = icon;
+    this.lat = lat;
+    this.long = long;
   }
 }
 

@@ -43,7 +43,9 @@ const domManipulation = (() => {
       descripInfo.innerHTML = response.description;
       const iconImg = document.getElementById('icon-img');
       iconImg.setAttribute('src', `http://openweathermap.org/img/wn/${response.icon}@2x.png`);
-      apiFlickr(response.main).then((response) => {
+      console.log('here')
+      apiFlickr(response.main, response.lat, response.long).then((response) => {
+        console.log('start')
         const bgImaging = document.getElementById('bg-load');
         bgImaging.style.backgroundImage = `url(${response})`;
       }).catch(() => {
