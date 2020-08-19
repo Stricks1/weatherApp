@@ -62,7 +62,7 @@
 #error-container {
   background-color: rgb(252, 213, 213);
   color: black;
-  border-radius: 15px ;
+  border-radius: 15px;
 }
 
 #box-weather .location-name {
@@ -82,7 +82,7 @@
 }
 
 .temperature-info::after {
-  content:'\00b0';
+  content: '\00b0';
 }
 
 #box-weather h5 {
