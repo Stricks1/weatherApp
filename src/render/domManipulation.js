@@ -16,10 +16,16 @@ const domManipulation = (() => {
     descripInfo.innerHTML = '';
     const iconImg = document.getElementById('icon-img');
     iconImg.setAttribute('src', '');
+    const dateInfo = document.getElementById('date-info');
+    dateInfo.innerHTML = '';
+    const boxInfo = document.getElementById('box-weather');
+    boxInfo.classList.add('d-none');
+    boxInfo.classList.remove('d-flex');
   }
 
   function changeCity() {
     clearInfo();
+    const boxInfo = document.getElementById('box-weather');
     const loadGif = document.getElementById('loading');
     loadGif.classList.remove('d-none');
     const searchBtn = document.getElementById('search-city');
@@ -36,6 +42,7 @@ const domManipulation = (() => {
       const mainInfo = document.getElementById('main-info');
       const descripInfo = document.getElementById('description-info');
       const iconImg = document.getElementById('icon-img');
+      const dateInfo = document.getElementById('date-info');
       apiFlickr(cityWeather.main, cityWeather.lat, cityWeather.long).then((response) => {
         const bgImaging = document.getElementById('bg-load');
         const image = new Image();
@@ -45,12 +52,17 @@ const domManipulation = (() => {
           loadGif.classList.add('d-none');
           searchBtn.classList.remove('d-none');
           searchInput.classList.remove('d-none');
+          boxInfo.classList.remove('d-none');
+          boxInfo.classList.add('d-flex');
           cityName.innerHTML = cityWeather.city;
           countryName.innerHTML = cityWeather.country;
           tempC.innerHTML = cityWeather.temperatureC;
           tempF.innerHTML = cityWeather.temperatureF;
           mainInfo.innerHTML = cityWeather.main;
           descripInfo.innerHTML = cityWeather.description;
+          let date = new Date().toUTCString();
+          date = date.split(' ').slice(0, 4).join(' ');
+          dateInfo.innerHTML = date;
           iconImg.setAttribute('src', `http://openweathermap.org/img/wn/${cityWeather.icon}@2x.png`);
         });
       }).catch(() => {
@@ -69,9 +81,36 @@ const domManipulation = (() => {
     return element;
   }
 
+  function changeTemp() {
+    const buttonC = document.getElementById('btn-c');
+    const buttonF = document.getElementById('btn-f');
+    const tempC = document.getElementById('temp-c');
+    const tempF = document.getElementById('temp-f');
+    buttonC.classList.toggle('selected');
+    buttonF.classList.toggle('selected');
+    tempC.classList.toggle('d-inline');
+    tempC.classList.toggle('d-none');
+    tempF.classList.toggle('d-inline');
+    tempF.classList.toggle('d-none');
+  }
+
+  function setToggleListener() {
+    const buttonC = document.getElementById('btn-c');
+    const buttonF = document.getElementById('btn-f');
+    buttonC.addEventListener('click', changeTemp);
+    buttonF.addEventListener('click', changeTemp);
+  }
+
   const setListeners = () => {
     const buttonSearch = document.getElementById('search-city');
     buttonSearch.addEventListener('click', changeCity);
+    const inputCity = document.getElementById('address-input');
+    inputCity.addEventListener('keypress', (e) => {
+      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+        changeCity();
+      }
+    });
+    setToggleListener();
   };
 
   return {
