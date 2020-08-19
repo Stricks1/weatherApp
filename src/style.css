@@ -30,6 +30,11 @@
   padding: 1rem 0;
 }
 
+#error-info {
+  margin: 1rem;
+  text-align: center;
+}
+
 #search-city:hover {
   background-color: rgb(248, 135, 135);
 }
@@ -53,7 +58,8 @@
   opacity: 0.9;
 }
 
-#box-weather {
+#box-weather,
+#error-container {
   background-color: rgb(252, 213, 213);
   color: black;
   border-radius: 15px ;
