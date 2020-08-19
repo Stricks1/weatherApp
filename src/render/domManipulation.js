@@ -18,6 +18,8 @@ const domManipulation = (() => {
     iconImg.setAttribute('src', '');
     const dateInfo = document.getElementById('date-info');
     dateInfo.innerHTML = '';
+    const errorContainer = document.getElementById('error-container');
+    errorContainer.classList.add('d-none');
     const boxInfo = document.getElementById('box-weather');
     boxInfo.classList.add('d-none');
     boxInfo.classList.remove('d-flex');
@@ -27,6 +29,7 @@ const domManipulation = (() => {
     clearInfo();
     const boxInfo = document.getElementById('box-weather');
     const loadGif = document.getElementById('loading');
+    const errorContainer = document.getElementById('error-container');
     loadGif.classList.remove('d-none');
     const searchBtn = document.getElementById('search-city');
     const searchInput = document.querySelector('.algolia-places');
@@ -68,15 +71,31 @@ const domManipulation = (() => {
       }).catch(() => {
         const bgImaging = document.getElementById('bg-load');
         bgImaging.style.backgroundImage = 'url(https://data.whicdn.com/images/70107766/original.jpg)';
+        loadGif.classList.add('d-none');
+        searchBtn.classList.remove('d-none');
+        searchInput.classList.remove('d-none');
+        boxInfo.classList.remove('d-none');
+        boxInfo.classList.add('d-flex');
+        cityName.innerHTML = cityWeather.city;
+        countryName.innerHTML = cityWeather.country;
+        tempC.innerHTML = cityWeather.temperatureC;
+        tempF.innerHTML = cityWeather.temperatureF;
+        mainInfo.innerHTML = cityWeather.main;
+        descripInfo.innerHTML = cityWeather.description;
+        let date = new Date().toUTCString();
+        date = date.split(' ').slice(0, 4).join(' ');
+        dateInfo.innerHTML = date;
+        iconImg.setAttribute('src', `http://openweathermap.org/img/wn/${cityWeather.icon}@2x.png`);
       });
     }).catch(() => {
-      const cityName = document.getElementById('city-name');
-      cityName.innerHTML = 'City not found, please try another city';
       const bgImaging = document.getElementById('bg-load');
       bgImaging.style.backgroundImage = 'url(https://data.whicdn.com/images/70107766/original.jpg)';
       loadGif.classList.add('d-none');
       searchBtn.classList.remove('d-none');
       searchInput.classList.remove('d-none');
+      const errorMsg = document.getElementById('error-info');
+      errorMsg.innerHTML = `Sorry we could not get weather information for <b>${city.value}</b>, please try another city`;
+      errorContainer.classList.remove('d-none');
     });
     return element;
   }
