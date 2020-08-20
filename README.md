@@ -5,9 +5,9 @@
 
 # Weather API
 
+On this project, I created an app to get the weather information. You just search the city and it will return the weather on that location. It uses OpenWeather API to get the weather information, Flickr API to get images and Algoria API to return a list of cities to autocomplete on the Search.
 
-
-![screenshot]
+![screenshot](./src/ssWeather.png)
 
 ## Table of Contents
 
@@ -22,10 +22,14 @@
 
 ## Features
 
+- The app can switch between Celsius or Fahrenheit degrees
+- It will return as a background image, some image that was taken around the city it is searching (using Flickr API for it)
+- It suggests cities on search (using Algoria API for it)
+- When there is no return for the weather API it handles the error showing a message
 
 ## Demo
 
-[Live Demo]
+[Live Demo](https://raw.githack.com/Stricks1/weatherApp/feature-api/dist/index.html)
 
 ## Installation
 
